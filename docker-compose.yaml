@@ -1,0 +1,17 @@
+services:
+  lpcc-env:
+    container_name: lpcc-env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lpcc:latest
+    volumes:
+      - .:/workspace
+      - ~/Datasets/KITTIDemo:/workspace/datasets
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    working_dir: /workspace
+    environment:
+      - DISPLAY=${DISPLAY}
+      - LIBGL_ALWAYS_SOFTWARE=1
+    tty: true
+    stdin_open: true

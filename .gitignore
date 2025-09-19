@@ -1,0 +1,6 @@
+.vscode/
+.env
+
+processed_data/
+
+rcpcc/build/

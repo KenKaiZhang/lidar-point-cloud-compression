@@ -1,0 +1,11 @@
+{
+    "name": "LiDAR Point Cloud Compression Env",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "service": "lpcc-env",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python"]
+        }
+    }
+}
