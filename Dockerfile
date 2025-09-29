@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONPATH=/workspace/src
@@ -51,4 +51,4 @@ COPY . .
 
 RUN pip3 install -r pointpillars/requirements.txt
 
-CMD ["/bin/bash"]
+CMD ["bash"]

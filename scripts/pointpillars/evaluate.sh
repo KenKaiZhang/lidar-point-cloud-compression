@@ -3,25 +3,40 @@
 CALL_DIR="$(pwd)"
 HOME_DIR="/workspace"
 
-GT_DATASET_DIR="$HOME_DIR/datasets"
+GT_DATASET_DIR="$HOME_DIR/dataset"
+PROCESSED_DIR="$HOME_DIR/processed_datasets"
 POINT_PILLAR_DIR="$HOME_DIR/pointpillars"
 
 echo "Starting Point Pillar evaluation..."
 
 # ==============================================================================
-# Check if using processed training/val data for evaluation
+# Argument Parsing (Implementing -p <folder> logic)
 # ==============================================================================
-if [[ $# -gt 1 || ($# -eq 1 && "$1" != "--use-processed") ]]; then
-    echo "Error: Invalid arguments." >&2
-    echo "Usage: $0 [--use-processed]" >&2
-    exit 1
-fi
 
-if [[ "$1" == "--use-processed" ]]; then
-    DATASET_DIR="$HOME_DIR/processed_data"
-else
-    DATASET_DIR="$GT_DATASET_DIR"
-fi
+PROCESSED_SUBDIR=""
+DATASET_DIR="$GT_DATASET_DIR"
+
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        -p|--processed)
+            if [ -n "$2" ] && ! [[ "$2" =~ ^- ]]; then
+                PROCESSED_SUBDIR="$2"
+                DATASET_DIR="$PROCESSED_DIR/$PROCESSED_SUBDIR"
+                shift
+            else
+                echo "Error: Argument for $1 is missing or invalid." >&2
+                echo "Usage: $0 [-p <folder>]" >&2
+                exit 1
+            fi
+            ;;
+        *)
+            echo "Error: Unknown argument $1." >&2
+            echo "Usage: $0 [-p <folder>]" >&2
+            exit 1
+            ;;
+    esac
+    shift
+done
 
 echo "Evaluating with $DATASET_DIR..."
 

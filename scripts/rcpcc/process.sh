@@ -3,8 +3,8 @@
 CALL_DIR="$(pwd)"
 HOME_DIR="/workspace"
 
-DATASET_DIR="$HOME_DIR/datasets"
-PRO_DATASET_DIR="$HOME_DIR/processed_data/rcpcc"
+DATASET_DIR="$HOME_DIR/dataset"
+PRO_DATASET_DIR="$HOME_DIR/processed_datasets/rcpcc"
 RCPCC_DIR="$HOME_DIR/rcpcc"
 
 echo "Starting RCPCC processing..."

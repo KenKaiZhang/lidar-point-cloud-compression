@@ -65,17 +65,18 @@ def create_data_info_pkl(data_root, data_type, prefix, label=True, db=False):
         cur_info_dict['calib'] = calib_dict
 
         lidar_points = read_points(lidar_path)
-        reduced_lidar_points = remove_outside_points(
-            points=lidar_points, 
-            r0_rect=calib_dict['R0_rect'], 
-            tr_velo_to_cam=calib_dict['Tr_velo_to_cam'], 
-            P2=calib_dict['P2'], 
-            image_shape=image_shape)
+        reduced_lidar_points = lidar_points
+        # reduced_lidar_points = remove_outside_points(
+        #     points=lidar_points, 
+        #     r0_rect=calib_dict['R0_rect'], 
+        #     tr_velo_to_cam=calib_dict['Tr_velo_to_cam'], 
+        #     P2=calib_dict['P2'], 
+        #     image_shape=image_shape)
         saved_reduced_path = os.path.join(data_root, split, 'velodyne_reduced')
         os.makedirs(saved_reduced_path, exist_ok=True)
         saved_reduced_points_name = os.path.join(saved_reduced_path, f'{id}.bin')
         write_points(reduced_lidar_points, saved_reduced_points_name)
-
+        
         if label:
             label_path = os.path.join(data_root, split, 'label_2', f'{id}.txt')
             annotation_dict = read_label(label_path)

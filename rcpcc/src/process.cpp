@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <cmath> 
 
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
@@ -15,6 +16,11 @@
 #include "modules/decoder_module.h"
 #include "../utils/struct.h"
 #include "../utils/utils.h"
+
+float round_to_n_decimals(float value, int n) {
+    float multiplier = std::pow(10.0f, n);
+    return std::round(value * multiplier) / multiplier;
+}
 
 void processFile(const std::filesystem::path &input_path, const std::string &output_dir, int q_level)
 {
@@ -78,6 +84,20 @@ void processFile(const std::filesystem::path &input_path, const std::string &out
     DecoderModule decoder(encoded_data, 4, true, q_level);
     auto restored_pcloud = decoder.restored_pcloud;
 
+    const int DECIMAL_PLACES = 3;
+    auto round_value = [&](float value) -> float {
+        return round_to_n_decimals(value, DECIMAL_PLACES);
+    };
+        
+    for (auto& p : restored_pcloud)
+    {
+        p.x = round_value(p.x);
+        p.y = round_value(p.y);
+        p.z = round_value(p.z);
+        // Assuming 'r' in point_cloud corresponds to intensity
+        p.r = round_value(p.r); 
+    }
+
     // Convert restored data to PCL format for saving
     pcl::PointCloud<pcl::PointXYZI>::Ptr restored_pcl_cloud(new pcl::PointCloud<pcl::PointXYZI>);
     restored_pcl_cloud->width = restored_pcloud.size();
@@ -87,10 +107,11 @@ void processFile(const std::filesystem::path &input_path, const std::string &out
 
     for (size_t i = 0; i < restored_pcloud.size(); ++i)
     {
-        restored_pcl_cloud->points[i].x = restored_pcloud[i].x;
-        restored_pcl_cloud->points[i].y = restored_pcloud[i].y;
-        restored_pcl_cloud->points[i].z = restored_pcloud[i].z;
-        restored_pcl_cloud->points[i].intensity = restored_pcloud[i].r;
+        // Apply (round(value * 1000) / 1000) for 3 decimal places
+        restored_pcl_cloud->points[i].x = std::round(restored_pcloud[i].x * 1000.0f) / 1000.0f;
+        restored_pcl_cloud->points[i].y = std::round(restored_pcloud[i].y * 1000.0f) / 1000.0f;
+        restored_pcl_cloud->points[i].z = std::round(restored_pcloud[i].z * 1000.0f) / 1000.0f;
+        restored_pcl_cloud->points[i].intensity = std::round(restored_pcloud[i].r * 1000.0f) / 1000.0f;
     }
 
     // 5. Save decompressed file
