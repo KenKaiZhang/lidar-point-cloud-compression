@@ -1,6 +1,6 @@
 .vscode/
 .env
 
-processed_dataset/
+processed_datasets/
 
 rcpcc/build/
