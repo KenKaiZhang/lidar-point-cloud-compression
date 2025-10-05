@@ -22,7 +22,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-FILE_ID=$(printf "%06d" "$1")
+FILE_ID=$(printf "%06d" $((10#$1)))
 
 echo "Preparing to compare files for ID: $FILE_ID"
 

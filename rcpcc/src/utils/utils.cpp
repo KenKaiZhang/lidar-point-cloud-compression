@@ -322,6 +322,8 @@ void restore_pcloud(cv::Mat &img, float pitch_precision, float yaw_precision,
       float pitch = (col + 0.5) * pitch_precision - LIVOX_COL_OFFSET;
       float yaw = (row + 0.5) * yaw_precision - LIVOX_ROW_OFFSET;
 #else
+      // float pitch = (col) * pitch_precision - COL_OFFSET; // KEN'S CHANGES
+      // float yaw = (row) * yaw_precision - ROW_OFFSET; // KEN'S CHANGES
       float pitch = (col + 0.5) * pitch_precision - COL_OFFSET;
       float yaw = (row + 0.5) * yaw_precision - ROW_OFFSET;
 
