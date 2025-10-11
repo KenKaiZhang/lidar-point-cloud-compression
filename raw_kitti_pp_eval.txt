@@ -1,0 +1,28 @@
+Starting Point Pillar evaluation...
+Evaluating with /workspace/dataset...
+Predicting and formatting the results...
+Evaluating. Please wait several seconds...
+==========BBOX_2D==========
+Pedestrian AP@0.5: 18.1818 18.1818 18.1818
+Cyclist AP@0.5: 9.0909 9.0909 9.0909
+Car AP@0.7: 45.4545 90.4656 88.2508
+==========AOS==========
+Pedestrian AOS@0.5: 16.5887 18.0570 18.0570
+Cyclist AOS@0.5: 9.0756 9.0756 9.0756
+Car AOS@0.7: 45.4527 90.4517 88.0871
+==========BBOX_BEV==========
+Pedestrian AP@0.5: 18.1818 18.1818 18.1818
+Cyclist AP@0.5: 9.0909 9.0909 9.0909
+Car AP@0.7: 45.4545 90.0433 87.6295
+==========BBOX_3D==========
+Pedestrian AP@0.5: 16.6667 16.8831 16.8831
+Cyclist AP@0.5: 9.0909 9.0909 9.0909
+Car AP@0.7: 44.1558 79.7949 77.9171
+
+==========Overall==========
+bbox_2d AP: 24.2424 39.2461 38.5078
+AOS AP: 23.7057 39.1948 38.4066
+bbox_bev AP: 24.2424 39.1053 38.3008
+bbox_3d AP: 23.3045 35.2563 34.6304
+
+Point Pillar evaluation complete.

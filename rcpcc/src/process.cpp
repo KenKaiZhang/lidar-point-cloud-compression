@@ -105,15 +105,6 @@ void processFile(const std::filesystem::path &input_path, const std::string &out
     restored_pcl_cloud->is_dense = true;
     restored_pcl_cloud->points.resize(restored_pcloud.size());
 
-    for (size_t i = 0; i < restored_pcloud.size(); ++i)
-    {
-        // Apply (round(value * 1000) / 1000) for 3 decimal places
-        restored_pcl_cloud->points[i].x = std::round(restored_pcloud[i].x * 1000.0f) / 1000.0f;
-        restored_pcl_cloud->points[i].y = std::round(restored_pcloud[i].y * 1000.0f) / 1000.0f;
-        restored_pcl_cloud->points[i].z = std::round(restored_pcloud[i].z * 1000.0f) / 1000.0f;
-        restored_pcl_cloud->points[i].intensity = std::round(restored_pcloud[i].r * 1000.0f) / 1000.0f;
-    }
-
     // 5. Save decompressed file
     if (extension == ".ply")
     {

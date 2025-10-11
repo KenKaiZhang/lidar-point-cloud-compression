@@ -1,3 +1,7 @@
+Starting Point Pillar evaluation...
+Evaluating with /workspace/processed_datasets/rcpcc...
+Predicting and formatting the results...
+Evaluating. Please wait several seconds...
 ==========BBOX_2D==========
 Pedestrian AP@0.5: 0.0000 0.0000 0.0000
 Cyclist AP@0.5: 0.0000 0.0000 0.0000
@@ -20,3 +24,5 @@ bbox_2d AP: 0.0000 0.0000 0.0000
 AOS AP: 0.0000 0.0000 0.0000
 bbox_bev AP: 0.0000 0.0000 0.0000
 bbox_3d AP: 0.0000 0.0000 0.0000
+
+Point Pillar evaluation complete.
